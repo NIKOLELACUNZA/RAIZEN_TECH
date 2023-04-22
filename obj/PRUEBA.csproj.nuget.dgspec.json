@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\NIKOLE\\Desktop\\PRUEBA\\PRUEBA.csproj": {}
+    "C:\\Users\\NIKOLE\\Desktop\\PRUEBA\\PRUEBA.csproj": {}
   },
   "projects": {
-    "c:\\Users\\NIKOLE\\Desktop\\PRUEBA\\PRUEBA.csproj": {
+    "C:\\Users\\NIKOLE\\Desktop\\PRUEBA\\PRUEBA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\NIKOLE\\Desktop\\PRUEBA\\PRUEBA.csproj",
+        "projectUniqueName": "C:\\Users\\NIKOLE\\Desktop\\PRUEBA\\PRUEBA.csproj",
         "projectName": "PRUEBA",
-        "projectPath": "c:\\Users\\NIKOLE\\Desktop\\PRUEBA\\PRUEBA.csproj",
+        "projectPath": "C:\\Users\\NIKOLE\\Desktop\\PRUEBA\\PRUEBA.csproj",
         "packagesPath": "C:\\Users\\NIKOLE\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\NIKOLE\\Desktop\\PRUEBA\\obj\\",
+        "outputPath": "C:\\Users\\NIKOLE\\Desktop\\PRUEBA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\NIKOLE\\AppData\\Roaming\\NuGet\\NuGet.Config"
