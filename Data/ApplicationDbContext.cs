@@ -19,19 +19,19 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<CART_ITEM>? CART_ITEMs{get; set;}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<CART>()
-        .HasOne(c => c.USERs)
-        .WithOne(u => u.CARTs)
-        .HasForeignKey<USERS>(u => u.Id_User);
+    {
+        modelBuilder.Entity<CART>()
+            .HasOne(c => c.USERs)
+            .WithOne(u => u.CARTs)
+            .HasForeignKey<USERS>(u => u.Id_User);
 
-    modelBuilder.Entity<CART_ITEM>()
-        .HasOne(c => c.ORDER_ITEMs)
-        .WithOne(u => u.CART_ITEMs)
-        .HasForeignKey<ORDER_ITEM>(u => u.Id_OrderItem);
+        modelBuilder.Entity<CART_ITEM>()
+            .HasOne(c => c.ORDER_ITEMs)
+            .WithOne(u => u.CART_ITEMs)
+            .HasForeignKey<ORDER_ITEM>(u => u.Id_OrderItem);
+        modelBuilder.Entity<Microsoft.AspNetCore.Identity.IdentityUserLogin<string>>().HasNoKey();  
+        
 
+    }
 }
 
-
-
-}

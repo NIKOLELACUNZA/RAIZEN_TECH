@@ -115,9 +115,9 @@ input{
   font-size:14px;
   text-align: justify;
 }
-header{
+/* header{
   display: none;
-}
+} */
 footer{
   display: none;
 }
