@@ -11315,19 +11315,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\NIKOLE\\.nuget\\packages\\": {}
+    "C:\\Users\\Jesús H. - F1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\NIKOLE\\Desktop\\PRUEBA\\PRUEBA.csproj",
+      "projectUniqueName": "C:\\Users\\Jesús H. - F1\\Desktop\\proyect\\RAIZEN_TECH\\PRUEBA.csproj",
       "projectName": "PRUEBA",
-      "projectPath": "c:\\Users\\NIKOLE\\Desktop\\PRUEBA\\PRUEBA.csproj",
-      "packagesPath": "C:\\Users\\NIKOLE\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\NIKOLE\\Desktop\\PRUEBA\\obj\\",
+      "projectPath": "C:\\Users\\Jesús H. - F1\\Desktop\\proyect\\RAIZEN_TECH\\PRUEBA.csproj",
+      "packagesPath": "C:\\Users\\Jesús H. - F1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Jesús H. - F1\\Desktop\\proyect\\RAIZEN_TECH\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\NIKOLE\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Jesús H. - F1\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
