@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jesús H. - F1\\Desktop\\proyect\\RAIZEN_TECH\\PRUEBA.csproj": {}
+    "D:\\Universidad\\6to ciclo\\Programacion 1\\proy-pruebas\\RAIZEN_TECH\\PRUEBA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jesús H. - F1\\Desktop\\proyect\\RAIZEN_TECH\\PRUEBA.csproj": {
+    "D:\\Universidad\\6to ciclo\\Programacion 1\\proy-pruebas\\RAIZEN_TECH\\PRUEBA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jesús H. - F1\\Desktop\\proyect\\RAIZEN_TECH\\PRUEBA.csproj",
+        "projectUniqueName": "D:\\Universidad\\6to ciclo\\Programacion 1\\proy-pruebas\\RAIZEN_TECH\\PRUEBA.csproj",
         "projectName": "PRUEBA",
-        "projectPath": "C:\\Users\\Jesús H. - F1\\Desktop\\proyect\\RAIZEN_TECH\\PRUEBA.csproj",
-        "packagesPath": "C:\\Users\\Jesús H. - F1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jesús H. - F1\\Desktop\\proyect\\RAIZEN_TECH\\obj\\",
+        "projectPath": "D:\\Universidad\\6to ciclo\\Programacion 1\\proy-pruebas\\RAIZEN_TECH\\PRUEBA.csproj",
+        "packagesPath": "C:\\Users\\JOSE DAVID\\.nuget\\packages\\",
+        "outputPath": "D:\\Universidad\\6to ciclo\\Programacion 1\\proy-pruebas\\RAIZEN_TECH\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Jesús H. - F1\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\JOSE DAVID\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -90,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
