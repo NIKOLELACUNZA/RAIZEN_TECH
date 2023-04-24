@@ -7,24 +7,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PRUEBA.Models
 {
+    [Table("Cart")]
     public class CART
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
-
-        [Key]
-        public int Id_Cart { get; set; }
-        
-         [ForeignKey("USERS")]
-        public int Id_User { get; set; }
-       
+        public int id { get; set; }   
+        public USERS? Users { get; set; }    
         public DateTime Created_Date { get; set; }
         public DateTime Last_Updated_Date { get; set; }
-        public USERS? USERs {get; set;}
-
-       public List<CART_ITEM>? CART_ITEMs { get; set; }
-       public List<ORDER>? ORDERs { get; set; }     
-
 
     }
 }

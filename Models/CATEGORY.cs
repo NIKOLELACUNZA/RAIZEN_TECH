@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PRUEBA.Models
 {
-    public class CATEGORY
+        public class CATEGORY
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
