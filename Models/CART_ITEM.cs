@@ -7,17 +7,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PRUEBA.Models
 {
+    [Table("CartItem")]
     public class CART_ITEM
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
-
-        [Key]
-        public int Id_CartItem { get; set; }
+        public int id { get; set; }
+        public CART? Cart { get; set; }
+        public PRODUCT? Product { get; set; }
         public int Quantity { get; set; }
+        
 
-        public CART? CARTs { get; set; }
-        public PRODUCT? PRODUCTs { get; set; }
-         public ORDER_ITEM? ORDER_ITEMs{get; set;}
+
     }
 }

@@ -7,21 +7,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PRUEBA.Models
 {
+ [Table("Users")]
     public class USERS
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
-        
-        [Key]
-        public int Id_User{get;set;}
+        public int id{get;set;}
         public String? Name{get;set;}
         public String? Email{get;set;}
         public String? Password{get;set;}
         public String? Address{get;set;}
         public int PhoneNumber{get;set;}
 
-        public List<ORDER>? ORDERs{get;set;}
-        public CART? CARTs{get; set;}
     }
 
 }

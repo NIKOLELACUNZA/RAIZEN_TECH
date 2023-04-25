@@ -7,14 +7,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PRUEBA.Models
 {
-    public class CATEGORY
+    [Table("Category")]
+        public class CATEGORY
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
 
-        public int ID_CATEGORY { get; set; }
+        public int id { get; set; }
         public String? Name { get; set; }
-        
-        public List<PRODUCT>? PRODUCTs { get;set;}
     }
 }
