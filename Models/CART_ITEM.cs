@@ -14,10 +14,6 @@ namespace PRUEBA.Models
 
         [Key]
         public int Id_CartItem { get; set; }
-        [ForeignKey("CART")]
-        public int Id_Cart { get; set; }
-        [ForeignKey("PRODUCT")]
-        public int Id_Product { get; set; }
         public int Quantity { get; set; }
 
         public CART? CARTs { get; set; }

@@ -14,9 +14,6 @@ namespace PRUEBA.Models
 
         [Key]
         public int Id_Cart { get; set; }
-        
-         [ForeignKey("USERS")]
-        public int Id_User { get; set; }
        
         public DateTime Created_Date { get; set; }
         public DateTime Last_Updated_Date { get; set; }

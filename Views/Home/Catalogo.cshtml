@@ -1,0 +1,56 @@
+@model IEnumerable<PRODUCT>
+
+<h2>Lista de productos</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var producto in Model)
+    {
+      <tr class="hov">
+        <td>@producto.Id</td>
+        <td>@producto.Nombre</td>
+        <td>@producto.Apellido</td>
+        <td>@producto.Email</td>
+        <td>
+          <a asp-action="Edit" asp-route-id="@producto.Id">Editar</a> |
+          <a asp-action="Delete" asp-route-id="@producto.Id">Eliminar</a>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+<p>
+  <a asp-action="Create">Agregar Nueva producto</a>
+</p>
+
+<style>
+  .table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid rgb(92, 92, 92);
+    cursor: default;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  thead :nth-child(1) {
+    background-color: #ccc;
+  }
+
+  .hov:hover {
+    background-color: #f5f5f5;
+  }
+</style>
