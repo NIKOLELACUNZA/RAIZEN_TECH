@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using PRUEBA.Models;
 using PRUEBA.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace PRUEBA.Controllers;
 
@@ -10,9 +12,12 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly ApplicationDbContext _context;
 
-    public HomeController(ApplicationDbContext context)
+    private readonly UserManager<IdentityUser> _userManager;
+
+    public HomeController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
     {
         _context=context;
+        _userManager=userManager;
     }
 
     public IActionResult Index()
@@ -20,8 +25,13 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Privacy()
+    public async Task<IActionResult> Privacy()
     {
+      // Debug
+      var user = await _userManager.GetUserAsync(User);
+      var roles = await _userManager.GetRolesAsync(user);
+      var role = roles.FirstOrDefault();
+      System.Console.WriteLine($"Rol del usuario: {role}");
         return View();
     }
 
@@ -30,31 +40,40 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-
+[Authorize(Roles = "Administrador,Cliente")]
     public IActionResult Catalogo(){
       var productos = _context.PRODUCTs.ToList();
       return View(productos);
     }
 
-    public IActionResult Create()
-    {
-        return View();
-    }
+    [Authorize(Roles = "Administrador")]
+      public IActionResult Create()
+      {
+          return View();
+      }
 
-    [HttpPost]
-    public IActionResult Create(PRODUCT product)
-    {
-        _context.PRODUCTs.Add(product);
-        _context.SaveChanges();
-        return RedirectToAction("Catalogo");
-    }
+    [Authorize(Roles = "Administrador")]
+      [HttpPost]
+      public IActionResult Create(PRODUCT product)
+      {
 
-public IActionResult Delete(int id)
+          if(ModelState.IsValid){
+            _context.PRODUCTs.Add(product);
+            _context.SaveChanges();
+            return RedirectToAction("Catalogo");
+          }
+          return View("Create");
+          
+      }
+
+[Authorize(Roles = "Administrador")]
+    public IActionResult Delete(int id)
     {
         var persona = _context.PRODUCTs.Find(id);
         return View(persona);
     }
 
+[Authorize(Roles = "Administrador")]
     [HttpPost]
     public IActionResult DeleteConfirmed(int id)
     {
@@ -64,4 +83,22 @@ public IActionResult Delete(int id)
         _context.SaveChanges();
         return RedirectToAction("Catalogo");
     }
+
+[Authorize(Roles = "Administrador")]
+public IActionResult Edit(int id)
+    {
+        var producto = _context.PRODUCTs.Find(id);
+        return View(producto);
+    }
+    
+[Authorize(Roles = "Administrador")]
+    [HttpPost]
+    public IActionResult Edit(PRODUCT producto)
+    {
+        _context.PRODUCTs.Update(producto);
+        _context.SaveChanges();
+        return RedirectToAction("Catalogo");
+    }
+
+
 }

@@ -16,6 +16,9 @@ namespace PRUEBA.Models
         public CATEGORY? Category { get; set; }
         public string? Name { get; set; }
         public string? Descripcion { get; set; }
+
+        [Required(ErrorMessage = "El precio es obligatorio")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "El precio debe ser un número decimal con hasta dos decimales")]
         public Decimal Price { get; set; }
         public int Quantity { get; set; }
         public string? Image_URL { get; set; }
