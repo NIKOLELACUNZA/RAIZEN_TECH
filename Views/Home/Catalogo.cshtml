@@ -1,56 +1,58 @@
 @model IEnumerable<PRODUCT>
 
-<h2>Lista de productos</h2>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Apellido</th>
-      <th>Email</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach (var producto in Model)
-    {
-      <tr class="hov">
-        <td>@producto.Id</td>
-        <td>@producto.Nombre</td>
-        <td>@producto.Apellido</td>
-        <td>@producto.Email</td>
-        <td>
-          <a asp-action="Edit" asp-route-id="@producto.Id">Editar</a> |
-          <a asp-action="Delete" asp-route-id="@producto.Id">Eliminar</a>
-        </td>
-      </tr>
-    }
-  </tbody>
-</table>
-<p>
-  <a asp-action="Create">Agregar Nueva producto</a>
-</p>
-
 <style>
-  .table {
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid rgb(92, 92, 92);
-    cursor: default;
+  .card {
+    height: 400px;
+    width: 300px;
   }
 
-  th,
-  td {
-    text-align: left;
-    padding: 8px;
+  .container-catalogo .card-img-top {
+    height: 200px;
+
+    object-fit: cover;
   }
 
-  thead :nth-child(1) {
-    background-color: #ccc;
+  .container-catalogo .bloque-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 30px;
   }
 
-  .hov:hover {
-    background-color: #f5f5f5;
+  .container-catalogo .card-text {
+    padding: 0 !important;
+    margin: 0 !important;
   }
 </style>
+
+<div class="container-catalogo">
+  <h2>Lista de productos</h2>
+
+  <div class="container">
+    <div class="row">
+      @foreach (var producto in Model)
+      {
+        <div class="col-sm-4">
+          <div class="card product-card mb-4">
+            <img src="@producto.Image_URL" class="card-img-top" alt="@producto.Name">
+            <div class="card-body">
+              <h5 class="card-title">@producto.Name</h5>
+              <p class="card-text">@producto.Descripcion</p>
+              <div class="bloque-flex">
+                <p class="card-text">Price: @producto.Price</p>
+                <p class="card-text">Quantity: @producto.Quantity</p>
+              </div>
+              <a asp-action="Edit" asp-route-id="@producto.id" class="btn btn-primary">Editar</a>
+              <a asp-action="Delete" asp-route-id="@producto.id" class="btn btn-danger">Eliminar</a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <p>
+    <a asp-action="Create" class="btn btn-success">Agregar nuevo producto</a>
+  </p>
+</div>
+

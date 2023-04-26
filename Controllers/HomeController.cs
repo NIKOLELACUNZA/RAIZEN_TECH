@@ -35,4 +35,33 @@ public class HomeController : Controller
       var productos = _context.PRODUCTs.ToList();
       return View(productos);
     }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Create(PRODUCT product)
+    {
+        _context.PRODUCTs.Add(product);
+        _context.SaveChanges();
+        return RedirectToAction("Catalogo");
+    }
+
+public IActionResult Delete(int id)
+    {
+        var persona = _context.PRODUCTs.Find(id);
+        return View(persona);
+    }
+
+    [HttpPost]
+    public IActionResult DeleteConfirmed(int id)
+    {
+        System.Console.WriteLine(id);
+        var persona = _context.PRODUCTs.Find(id);
+        _context.PRODUCTs.Remove(persona);
+        _context.SaveChanges();
+        return RedirectToAction("Catalogo");
+    }
 }

@@ -30,8 +30,15 @@ body {
   padding-bottom: 50px;
 }
 
-p {
+
+/* Gente, aprendan que es encapsulado de estilos, para que no afecten el diseño de todo el sitio web */
+.container-login p{
   font-size: 50px;
+  text-align: center;
+}
+
+.container-register p{
+font-size: 50px;
   text-align: center;
 }
 
