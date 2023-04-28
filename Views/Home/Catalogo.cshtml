@@ -3,34 +3,41 @@
 @model IEnumerable<PRODUCT>
 
 <style>
-  .card {
+.card {
     height: 400px;
     width: 300px;
+    border-radius: 30px;
   }
-
   .container-catalogo .card-img-top {
     height: 200px;
-
     object-fit: cover;
   }
-
   .container-catalogo .bloque-flex {
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: right;
+    justify-content: flex-start;
     height: 30px;
   }
-
+  .card-text1{
+    padding-left: 5%;
+  }
   .container-catalogo .card-text {
     padding: 0 !important;
     margin: 0 !important;
   }
+  .card-img-top{
+    padding: 20px;
+  }
+  .titulo{
+    text-align: center;
+    font-size: 50px;
+    color: white;
+  }
 </style>
 
-
-
-<div class="container-catalogo">
-  <h2>Lista de productos</h2>
+ <div class="container-catalogo">
+  <h2 class="titulo">Lista de productos</h2>
 
   <div class="container">
     <div class="row">
@@ -43,8 +50,8 @@
               <h5 class="card-title">@producto.Name</h5>
               <p class="card-text">@producto.Descripcion</p>
               <div class="bloque-flex">
-                <p class="card-text">Price: @producto.Price</p>
-                <p class="card-text">Quantity: @producto.Quantity</p>
+                <p class="card-text">Precio: @producto.Price</p>
+                <p class="card-text1">Cantidad: @producto.Quantity</p>
               </div>
               @if (User.IsInRole("Administrador"))
               {
@@ -66,6 +73,6 @@
   {
     <p>
       <a asp-action="Create" class="btn btn-success">Agregar nuevo producto</a>
-    </p>
-  }
+    </p>
+  }
 </div>
