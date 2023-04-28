@@ -25,16 +25,6 @@ public class HomeController : Controller
         return View();
     }
 
-    public async Task<IActionResult> Privacy()
-    {
-      // Debug
-      var user = await _userManager.GetUserAsync(User);
-      var roles = await _userManager.GetRolesAsync(user);
-      var role = roles.FirstOrDefault();
-      System.Console.WriteLine($"Rol del usuario: {role}");
-        return View();
-    }
-
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
