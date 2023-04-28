@@ -89,6 +89,4 @@ public IActionResult Edit(int id)
         _context.SaveChanges();
         return RedirectToAction("Catalogo");
     }
-
-
 }

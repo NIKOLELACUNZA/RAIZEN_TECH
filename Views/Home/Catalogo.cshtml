@@ -3,40 +3,42 @@
 @model IEnumerable<PRODUCT>
 
 <style>
-.card {
+  .card {
     height: 400px;
     width: 300px;
     border-radius: 30px;
   }
+
   .container-catalogo .card-img-top {
     height: 200px;
     object-fit: cover;
   }
+
   .container-catalogo .bloque-flex {
     display: flex;
     flex-wrap: wrap;
     align-items: right;
-    justify-content: flex-start;
+    justify-content: space-between;
     height: 30px;
   }
-  .card-text1{
-    padding-left: 5%;
-  }
+
   .container-catalogo .card-text {
     padding: 0 !important;
     margin: 0 !important;
   }
-  .card-img-top{
+
+  .card-img-top {
     padding: 20px;
   }
-  .titulo{
+
+  .titulo {
     text-align: center;
     font-size: 50px;
     color: white;
   }
 </style>
 
- <div class="container-catalogo">
+<div class="container-catalogo">
   <h2 class="titulo">Lista de productos</h2>
 
   <div class="container">
@@ -73,6 +75,7 @@
   {
     <p>
       <a asp-action="Create" class="btn btn-success">Agregar nuevo producto</a>
-    </p>
-  }
+
+    </p>
+  }
 </div>
