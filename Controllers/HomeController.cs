@@ -25,13 +25,8 @@ public class HomeController : Controller
         return View();
     }
 
-    public async Task<IActionResult> Privacy()
+    public IActionResult AboutUs()
     {
-      // Debug
-      var user = await _userManager.GetUserAsync(User);
-      var roles = await _userManager.GetRolesAsync(user);
-      var role = roles.FirstOrDefault();
-      System.Console.WriteLine($"Rol del usuario: {role}");
         return View();
     }
 
@@ -102,6 +97,4 @@ public IActionResult Edit(int id)
         _context.SaveChanges();
         return RedirectToAction("Catalogo");
     }
-
-
 }
