@@ -53,6 +53,22 @@ body {
   text-align:justify;
   padding-left: 300px;
 }
+/* covid */
+.covid{ 
+  width: 1180px;
+  text-align: justify;
+  border-top: solid rgb(0,125,187);
+  border-bottom: solid rgb(0,125,187);
+  background-color: #E6E6E6;
+
+}
+.covid h3{
+  padding-top: 25px;
+}
+.covid p{
+  font-size:16px;
+  text-align: justify;
+}
 
 /* Gente, aprendan que es encapsulado de estilos, para que no afecten el diseño de todo el sitio web */
 .container-login p{
