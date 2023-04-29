@@ -15,20 +15,44 @@ html {
 .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
-
+header{
+  display: none;
+}
 body {
   margin-bottom: 60px;
-  background: linear-gradient(to bottom, #23b8a6, #2954eb, #0b0321);
   font-family: Arial, Helvetica, sans-serif;
+}
+.indexlogo{
+  background: linear-gradient(to bottom, #23b8a6, #2954eb, #0b0321);
+  display: block;
+  color: #fff;
+  text-align: center;
+  width: 1550px;
+  height: 750px;
+}
+.indexlogo h2{
+  font-size: 50px;
 }
 
 .logotipo {
   width: 300px;
   display: block;
   margin: 0 auto;
-  padding-top: 50px;
+  padding-top: 150px;
   padding-bottom: 50px;
 }
+/* inicio metas */
+.metas{
+  background: linear-gradient(to bottom,#F0F0F0,#fff, #F0F0F0 );
+  height: 200px;
+  width: 1200px;
+}
+.metas .rt{
+  color: #fff;
+  font-size: 50px;
+
+}
+/* fin metas */
 
 
 /* Gente, aprendan que es encapsulado de estilos, para que no afecten el diseño de todo el sitio web */

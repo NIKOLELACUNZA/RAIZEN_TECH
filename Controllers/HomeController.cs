@@ -40,7 +40,10 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-[Authorize(Roles = "Administrador,Cliente")]
+
+
+
+    [Authorize(Roles = "Administrador,Cliente")]
     public IActionResult Catalogo(){
       var productos = _context.PRODUCTs.ToList();
       return View(productos);

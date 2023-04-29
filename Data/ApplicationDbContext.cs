@@ -11,7 +11,7 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
         : base(options)
     {
     }
-   public DbSet<PRODUCT>? PRODUCTs{get; set;}
+    public DbSet<PRODUCT>? PRODUCTs{get; set;}
     public DbSet<USERS>? USERs{get; set;}
     public DbSet<ORDER>? ORDERs{get; set;}
     public DbSet<ORDER_ITEM>? ORDER_ITEMs{get;set;}
