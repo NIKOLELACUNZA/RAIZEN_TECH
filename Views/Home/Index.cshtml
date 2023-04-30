@@ -2,27 +2,27 @@
   ViewData["Title"] = "Home Page";
   Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@* portada *@
 <div class="indexlogo">
   <img class="logotipo" src="~/img/icon.png"><br>
   <h2>RAIZEN TECH</h2>
 </div>
 
-
+@* texto relleno *@
 <div class="container-index text-center">
   <h1 class="display-4 main-heading">Welcome to Raizen Tech</h1>
   <p class="lead main-paragraph">At Raizen Tech, we are committed to providing innovative and high-quality
     telecommunications solutions to meet our customers' needs. Our wide selection of products includes routers, GPON,
     ONU, and many more, all designed to provide stable and reliable connectivity.</p>
 </div> <br><br>
-
+@* relleno covid *@
 <div class=" container covid">
 				<div class="row">
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
 						<div class="col-md-12">
 							<b>
-								<h3>Respuesta al COVID-19</h3>
+								<h3>COVID-19 Response</h3>
 							</b>
 						</div>
 						<div class="row">
@@ -52,7 +52,7 @@
 					<div class="col-md-1"></div>
 </div><br>
 
-
+@* carrusel *@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide"><img src="~/img/slide1.jpg" alt=""></div>
@@ -135,13 +135,15 @@
           </div>
       </div>
   </section><br>
+
+   @* mapa *@
   <b><p id="hs">FIND US</p></b>
 	<hr class="hs"><br>
   <div class="container map">
     <iframe class ="map" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15602.841502675252!2d-77.00817897969972!3d-12.131958106414583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2spe!4v1682723871292!5m2!1ses-419!2spe" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div><br><br>
 
-
+@* comentarios *@
   <b><p id="hs">COMMENTS</p></b>
 	<hr class="hs"><br>
   <section class="comment-section">
@@ -168,13 +170,13 @@
           </div>
         </li>
       </ul><br><br>
-
+      <hr class="lineacomment">
       <form class="comment-form">
         <h3>Leave a comment</h3><br>
-        <div class="row comment-form__group">
-          <div class="col-md-2"><label for="comment">Comment:</label></div>
-          <div class="col-md-10">
-            <textarea id="comment" name="comment" required placeholder="Sends a comment"></textarea>
+        <div class="container row comment-form__group">
+          <div class="col-md-4"><label for="comment" >Comment:</label></div>
+          <div class="col-md-8">
+            <textarea id="comment" name="comment" placeholder="Sends a comment" required></textarea>
             <button><i class="fas fa-paper-plane"></i></button>
           </div>          
         </div>
