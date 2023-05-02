@@ -310,4 +310,13 @@ padding-left: 150px;
   width: 100%; 
   height: 2px;
 }
-/* siguiente parte */
+/* login */
+.container-login{
+  background: linear-gradient(to bottom, #23b8a6, #2954eb, #0b0321);
+  width: 1800px;
+  height: 1250px;
+}
+.icon-name{
+width: 200px;
+padding-left: 600px;
+}
