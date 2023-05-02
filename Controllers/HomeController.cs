@@ -44,6 +44,12 @@ public class HomeController : Controller
       return View(productos);
     }
 
+    [Authorize(Roles = "Administrador,Cliente")]
+    public IActionResult Carrito(){
+      var carrito = _context.CART_ITEMs.ToList();
+      return View(carrito);
+    }
+
     [Authorize(Roles = "Administrador")]
       public IActionResult Create()
       {
