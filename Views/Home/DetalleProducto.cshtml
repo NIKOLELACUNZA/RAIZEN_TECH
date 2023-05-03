@@ -45,6 +45,10 @@
   </dl>
   <div>
     <a href='@Url.Action("Catalogo", "Home")' class="btn btn-primary">Regresar a la lista de productos</a>
-    <a asp-action="AddToCart" asp-route-id="@Model.id" class="btn btn-success">Add to cart</a>
+    <form asp-action="AddToCart" method="post">
+      <input type="hidden" name="productId" value="@Model.id" />
+      <input type="number" name="quantity" value="1" min="1" />
+      <button type="submit" class="btn btn-success">Añadir al carrito</button>
+    </form>
   </div>
 </div>

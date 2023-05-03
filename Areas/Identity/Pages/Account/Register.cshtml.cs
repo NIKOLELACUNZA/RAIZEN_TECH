@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using PRUEBA.Data;
+using PRUEBA.Models;
 
 namespace PRUEBA.Areas.Identity.Pages.Account
 {
@@ -31,13 +33,16 @@ namespace PRUEBA.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
 
+        private readonly ApplicationDbContext _context;
+
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -46,6 +51,7 @@ namespace PRUEBA.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
+            _context=context;
         }
 
         /// <summary>
@@ -134,6 +140,17 @@ namespace PRUEBA.Areas.Identity.Pages.Account
 
                     // Asigna el rol "Cliente" al nuevo usuario
                     await _userManager.AddToRoleAsync(user, "Cliente");
+
+                    USERS newUser = new USERS
+                    {
+                        idUserDef = user.Id,
+                        Email =Input.Email,
+                        Password =Input.Password,
+                    };
+
+                    // Guarda la instancia de USERS en la base de datos
+                    _context.USERs.Add(newUser);
+                    await _context.SaveChangesAsync();
 
 
                     var userId = await _userManager.GetUserIdAsync(user);
