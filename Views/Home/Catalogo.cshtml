@@ -2,13 +2,11 @@
 @inject IAuthorizationService AuthorizationService
 @model IEnumerable<PRODUCT>
 
+@{
+  ViewData["Title"] = "Catalogo";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <style>
-  .card {
-    height: 400px;
-    width: 300px;
-    border-radius: 30px;
-  }
-
   .container-catalogo .card-img-top {
     height: 200px;
     object-fit: cover;
@@ -70,12 +68,4 @@
       }
     </div>
   </div>
-
-  @if (User.IsInRole("Administrador"))
-  {
-    <p>
-      <a asp-action="Create" class="btn btn-success">Agregar nuevo producto</a>
-
-    </p>
-  }
 </div>
