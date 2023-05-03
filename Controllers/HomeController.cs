@@ -4,6 +4,7 @@ using PRUEBA.Models;
 using PRUEBA.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace PRUEBA.Controllers;
 
@@ -97,4 +98,73 @@ public IActionResult Edit(int id)
         _context.SaveChanges();
         return RedirectToAction("Catalogo");
     }
+
+    public IActionResult Detalle(int id){
+      PRODUCT producto = _context.PRODUCTs.Find(id);
+      return View("DetalleProducto",producto)
+      ;
+    }
+
+    [HttpPost]
+public async Task<IActionResult> AddToCart(int productId, int quantity)
+{
+    // Obtén el usuario actual
+    string idUserDef = _userManager.GetUserId(User);
+    USERS user = await _context.USERs.FirstOrDefaultAsync(u => u.idUserDef == idUserDef);
+
+    // Obtén el carrito del usuario
+    CART cart = await _context.CARTs.FirstOrDefaultAsync(c => c.Users == user);
+
+    // Si el carrito no existe, crea uno nuevo y guárdalo en la base de datos
+    if (cart == null)
+    {
+        cart = new CART { Users = user };
+        _context.CARTs.Add(cart);
+        await _context.SaveChangesAsync();
+    }
+
+    // Obtén el producto por su ID
+    PRODUCT product = await _context.PRODUCTs.FindAsync(productId);
+
+    // Crea un nuevo objeto CART_ITEM con el producto y la cantidad proporcionada
+    CART_ITEM cartItem = new CART_ITEM
+    {
+        Cart = cart,
+        Product = product,
+        Quantity = quantity
+    };
+    // Guarda el nuevo objeto CART_ITEM en la base de datos
+    _context.CART_ITEMs.Add(cartItem);
+    await _context.SaveChangesAsync();
+
+    // Redirige al usuario a la vista del carrito
+    return RedirectToAction("Carrito");
+}
+
+
+    public async Task<IActionResult> Carrito()
+{
+    // Obtén el usuario por idUserDef
+    string idUserDef = _userManager.GetUserId(User);
+    USERS user = await _context.USERs.FirstOrDefaultAsync(u => u.idUserDef == idUserDef);
+
+    // Obtén el carrito por el idUserDef
+    CART cart = await _context.CARTs.FirstOrDefaultAsync(c => c.Users == user);
+
+    // Obtén la lista de elementos del carrito que tienen el carrito específico
+    List<CART_ITEM> listaCarrito = await _context.CART_ITEMs.Include(ci => ci.Product).Where(ci => ci.Cart == cart).ToListAsync();
+
+    System.Console.WriteLine(listaCarrito[1].Product);
+
+    if (listaCarrito[1].Product == null)
+    {
+        System.Console.WriteLine("Error");
+    }
+
+    return View("Carrito", listaCarrito);
+}
+
+
+
+
 }

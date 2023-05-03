@@ -62,7 +62,7 @@
               }
               @if (User.IsInRole("Cliente"))
               {
-                <a asp-action="AddToCart" asp-route-id="@producto.id" class="btn btn-success">Añadir al carrito</a>
+                <a asp-action="Detalle" asp-route-id="@producto.id" class="btn btn-success">Ver detalles</a>
               }
             </div>
           </div>

@@ -1,0 +1,42 @@
+@model List<PRUEBA.Models.CART_ITEM>
+
+@{
+  ViewData["Title"] = "Carrito";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Imagen</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Cantidad</th>
+      <th>Precio unitario</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in Model)
+    {
+      if (item.Product != null)
+      {
+        <tr>
+          <td><img src="@item.Product.Image_URL" alt="@item.Product.Name" style="width: 100px;"></td>
+          <td>@item.Product.Name</td>
+          <td>@item.Product.Descripcion</td>
+          <td>@item.Quantity</td>
+          <td>@item.Product.Price.ToString("C")</td>
+          <td>@((item.Product.Price * item.Quantity).ToString("C"))</td>
+        </tr>
+      }
+      else
+      {
+        <tr>
+          <td>Nada</td>
+        </tr>
+      }
+    }
+  </tbody>
+</table>

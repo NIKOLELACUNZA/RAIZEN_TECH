@@ -12,8 +12,8 @@ using PRUEBA.Data;
 namespace PRUEBA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230424233315_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230503151607_carrito")]
+    partial class carrito
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -460,6 +460,9 @@ namespace PRUEBA.Migrations
 
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("integer");
+
+                    b.Property<string>("idUserDef")
+                        .HasColumnType("text");
 
                     b.HasKey("id");
 
