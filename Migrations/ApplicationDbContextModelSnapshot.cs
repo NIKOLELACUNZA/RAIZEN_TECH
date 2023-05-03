@@ -458,6 +458,9 @@ namespace PRUEBA.Migrations
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("integer");
 
+                    b.Property<int>("idUserDef")
+                        .HasColumnType("integer");
+
                     b.HasKey("id");
 
                     b.ToTable("Users");

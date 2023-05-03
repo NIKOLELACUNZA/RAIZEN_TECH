@@ -97,4 +97,17 @@ public IActionResult Edit(int id)
         _context.SaveChanges();
         return RedirectToAction("Catalogo");
     }
+
+    public IActionResult Detalle(int id){
+      PRODUCT producto = _context.PRODUCTs.Find(id);
+      return View("DetalleProducto",producto)
+      ;
+    }
+
+    public IActionResult AddToCart(int id){
+      PRODUCT producto = _context.PRODUCTs.Find(id);
+      return View("DetalleProducto",producto)
+      ;
+    }
+
 }
