@@ -17,7 +17,7 @@ html {
 }
 
 .custom-nav .nav-link {
-  color: 1C1C1C !important;
+  color: #1C1C1C !important;
   font-size: 20px;
 }
 /* fin header */
@@ -83,6 +83,7 @@ body {
 }
 
 /* Gente, aprendan que es encapsulado de estilos, para que no afecten el diseño de todo el sitio web */
+
 .container-login p{
   font-size: 50px;
   text-align: center;
@@ -316,7 +317,6 @@ padding-left: 150px;
   width: 1800px;
   height: 1250px;
 }
-.icon-name{
+.input-style{
 width: 200px;
-padding-left: 600px;
 }
