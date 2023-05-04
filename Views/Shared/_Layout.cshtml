@@ -42,6 +42,16 @@
                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Carrito">Carrito</a>
               </li>
             }
+             @if (User.IsInRole("Cliente") || User.IsInRole("Administrador"))
+            {
+              <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Carrito">Carrito</a>
+              </li>
+            }
+            else
+            {
+
+            }
 
           </ul>
           <partial name="_LoginPartial" />
