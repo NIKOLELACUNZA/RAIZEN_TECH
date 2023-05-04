@@ -11,7 +11,7 @@
 
 <div class="container-catalogo">
   <section class="container-related-products">
-    <h2>Productos</h2>
+    <h2>Products</h2>
     <div class="card-list-products">
       @foreach (var producto in Model)
       {
@@ -21,10 +21,9 @@
           </div>
           <div class="info-card">
             <div class="text-product">
+              <h3>@producto.Brand</h3>
+              <h3>@producto.Category</h3>
               <h3>@producto.Name</h3>
-              <p class="category">
-                @producto.Descripcion
-              </p>
             </div>
             <div class="price">
               @producto.Price.ToString("C")
@@ -32,8 +31,8 @@
           </div>
           @if (User.IsInRole("Administrador"))
           {
-            <a asp-action="Edit" asp-route-id="@producto.id" class="btn btn-primary">Editar</a>
-            <a asp-action="Delete" asp-route-id="@producto.id" class="btn btn-danger">Eliminar</a>
+            <a asp-action="Edit" asp-route-id="@producto.id" class="btn btn-primary">Edit</a>
+            <a asp-action="Delete" asp-route-id="@producto.id" class="btn btn-danger">Delete</a>
           }
           @if (User.IsInRole("Cliente"))
           {
@@ -44,5 +43,13 @@
       }
     </div>
 
+  </section>
+  <section class="boton-addproduct">
+    @if (User.IsInRole("Administrador"))
+    {
+      <p>
+        <a asp-action="create" class="btn btn-succes">Add Product</a>
+      </p>
+    }
   </section>
 </div>

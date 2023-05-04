@@ -22,6 +22,8 @@ namespace PRUEBA.Models
         public Decimal Price { get; set; }
         public int Quantity { get; set; }
         public string? Image_URL { get; set; }
+        public String? Brand {get;set;}
+        public String? Especifications {get;set;}
 
     }
 }
