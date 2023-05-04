@@ -105,7 +105,6 @@ public IActionResult Edit(int id)
       ;
     }
 
-    [HttpPost]
 public async Task<IActionResult> AddToCart(int productId, int quantity)
 {
     // Obtén el usuario actual
@@ -136,6 +135,8 @@ public async Task<IActionResult> AddToCart(int productId, int quantity)
     // Guarda el nuevo objeto CART_ITEM en la base de datos
     _context.CART_ITEMs.Add(cartItem);
     await _context.SaveChangesAsync();
+
+    System.Console.WriteLine(quantity);
 
     // Redirige al usuario a la vista del carrito
     return RedirectToAction("Carrito");

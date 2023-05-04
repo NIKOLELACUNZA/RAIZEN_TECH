@@ -7,65 +7,42 @@
   Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
-  .container-catalogo .card-img-top {
-    height: 200px;
-    object-fit: cover;
-  }
-
-  .container-catalogo .bloque-flex {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: right;
-    justify-content: space-between;
-    height: 30px;
-  }
-
-  .container-catalogo .card-text {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  .card-img-top {
-    padding: 20px;
-  }
-
-  .titulo {
-    text-align: center;
-    font-size: 50px;
-    color: white;
-  }
 </style>
 
 <div class="container-catalogo">
-  <h2 class="titulo">Lista de productos</h2>
-
-  <div class="container">
-    <div class="row">
+  <section class="container-related-products">
+    <h2>Productos</h2>
+    <div class="card-list-products">
       @foreach (var producto in Model)
       {
-        <div class="col-sm-4">
-          <div class="card product-card mb-4">
-            <img src="@producto.Image_URL" class="card-img-top" alt="@producto.Name">
-            <div class="card-body">
-              <h5 class="card-title">@producto.Name</h5>
-              <p class="card-text">@producto.Descripcion</p>
-              <div class="bloque-flex">
-                <p class="card-text">Precio: @producto.Price</p>
-                <p class="card-text1">Cantidad: @producto.Quantity</p>
-              </div>
-              @if (User.IsInRole("Administrador"))
-              {
-                <a asp-action="Edit" asp-route-id="@producto.id" class="btn btn-primary">Editar</a>
-                <a asp-action="Delete" asp-route-id="@producto.id" class="btn btn-danger">Eliminar</a>
-              }
-              @if (User.IsInRole("Cliente"))
-              {
-                <a asp-action="Detalle" asp-route-id="@producto.id" class="btn btn-success">Ver detalles</a>
-              }
+        <div class="card">
+          <div class="card-img">
+            <img src="@producto.Image_URL" alt="@producto.Name">
+          </div>
+          <div class="info-card">
+            <div class="text-product">
+              <h3>@producto.Name</h3>
+              <p class="category">
+                @producto.Descripcion
+              </p>
+            </div>
+            <div class="price">
+              @producto.Price.ToString("C")
             </div>
           </div>
+          @if (User.IsInRole("Administrador"))
+          {
+            <a asp-action="Edit" asp-route-id="@producto.id" class="btn btn-primary">Editar</a>
+            <a asp-action="Delete" asp-route-id="@producto.id" class="btn btn-danger">Eliminar</a>
+          }
+          @if (User.IsInRole("Cliente"))
+          {
+            <a asp-action="Detalle" asp-route-id="@producto.id" class="btn btn-success">Ver detalles</a>
+          }
         </div>
+
       }
     </div>
-  </div>
+
+  </section>
 </div>

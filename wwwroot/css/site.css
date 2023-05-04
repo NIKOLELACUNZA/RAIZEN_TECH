@@ -199,13 +199,13 @@ input {
 
 
 /* inicio highlighted features and most popular products */
-.card-img-top{
+.container-catalogo .card-img-top{
   width: 500px;
   height: 250px;
   padding-left: 150px;
   align-items: center;
 }
-.card-title{
+.container-catalogo .card-title{
     text-decoration: none;
 		color:#1C1C1C;
 		font-size: 20px;
@@ -213,7 +213,7 @@ input {
     padding-top: 15px;
 		text-align: justify;
 }
-.card-text{
+.container-catalogo .card-text{
   text-align: justify;
   padding-left:170px;
   width: 480px;
