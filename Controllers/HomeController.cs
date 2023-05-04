@@ -45,12 +45,6 @@ public class HomeController : Controller
       return View(productos);
     }
 
-    [Authorize(Roles = "Administrador,Cliente")]
-    public IActionResult Carrito(){
-      var carrito = _context.CART_ITEMs.ToList();
-      return View(carrito);
-    }
-
     [Authorize(Roles = "Administrador")]
       public IActionResult Create()
       {
@@ -104,7 +98,6 @@ public IActionResult Edit(int id)
         _context.SaveChanges();
         return RedirectToAction("Catalogo");
     }
-<<<<<<< HEAD
 
     public IActionResult Detalle(int id){
       PRODUCT producto = _context.PRODUCTs.Find(id);
@@ -148,7 +141,7 @@ public async Task<IActionResult> AddToCart(int productId, int quantity)
     return RedirectToAction("Carrito");
 }
 
-
+[Authorize(Roles = "Administrador,Cliente")]
     public async Task<IActionResult> Carrito()
 {
     // Obtén el usuario por idUserDef
@@ -175,6 +168,3 @@ public async Task<IActionResult> AddToCart(int productId, int quantity)
 
 
 }
-=======
-}
->>>>>>> RamaJesus1
