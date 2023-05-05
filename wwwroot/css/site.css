@@ -51,7 +51,7 @@ body {
   width: 300px;
   display: block;
   margin: 0 auto;
-  padding-top: 150px;
+  padding-top: 50px;
   padding-bottom: 50px;
 }
 
@@ -312,10 +312,11 @@ padding-left: 150px;
   height: 2px;
 }
 /* login */
-.container-login{
+.container-login, .container-register{
   background: linear-gradient(to bottom, #23b8a6, #2954eb, #0b0321);
-  width: 1800px;
-  height: 1250px;
+}
+.container-register{
+  width: 100vw !important;
 }
 .input-style{
 width: 200px;
@@ -629,3 +630,6 @@ fa-chevron-up:hover{
   margin: 0 10px;
 }
 
+.ancho-input{
+  width: 500px !important;
+}
