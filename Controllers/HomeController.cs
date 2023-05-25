@@ -5,6 +5,7 @@ using PRUEBA.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using PRUEBA.ViewModels;
 
 namespace PRUEBA.Controllers;
 
@@ -155,17 +156,86 @@ public async Task<IActionResult> AddToCart(int productId, int quantity)
     // Obtén la lista de elementos del carrito que tienen el carrito específico
     List<CART_ITEM> listaCarrito = await _context.CART_ITEMs.Include(ci => ci.Product).Where(ci => ci.Cart == cart).ToListAsync();
 
-    System.Console.WriteLine(listaCarrito[1].Product);
-
-    if (listaCarrito[1].Product == null)
-    {
-        System.Console.WriteLine("Error");
-    }
-
     return View("Carrito", listaCarrito);
 }
 
 
+  public IActionResult PasarelaPagos(){
+    return View();
+  }
 
+[HttpPost]
+  public async Task<IActionResult> ProcesarPago()
+{
+    string idUserDef = _userManager.GetUserId(User);
+    USERS user = await _context.USERs.FirstOrDefaultAsync(u => u.idUserDef == idUserDef);
+
+    // Obtén el carrito por el idUserDef
+    CART cart = await _context.CARTs.FirstOrDefaultAsync(c => c.Users == user);
+
+    // Obtén la lista de elementos del carrito que tienen el carrito específico
+    List<CART_ITEM> listaCarrito = await _context.CART_ITEMs.Include(ci => ci.Product).Where(ci => ci.Cart == cart).ToListAsync();
+
+    listaCarrito.ForEach(e => System.Console.WriteLine(e.Product.Name));
+
+    // Crear nuevo ORDER
+    ORDER newOrder = new ORDER
+    {
+        // Inicializa los campos necesarios de tu objeto ORDER aquí
+        Users = user,
+        OrderDate = DateTime.UtcNow,
+        // Otros campos...
+    };
+    _context.ORDERs.Add(newOrder);
+    await _context.SaveChangesAsync();
+
+    // Trasladar elementos del carrito a ítems del pedido
+    foreach (var cartItem in listaCarrito)
+    {
+        ORDER_ITEM orderItem = new ORDER_ITEM
+        {
+            // Inicializa los campos necesarios de tu objeto ORDER_ITEM aquí
+            Order = newOrder,
+            Product = cartItem.Product,
+            Quantity = cartItem.Quantity,
+            // Otros campos...
+        };
+        _context.ORDER_ITEMs.Add(orderItem);
+        
+        // Eliminar el item del carrito
+        _context.CART_ITEMs.Remove(cartItem);
+    }
+
+    // Finalmente, guardar los cambios en el contexto y redireccionar al usuario
+    await _context.SaveChangesAsync();
+
+    return RedirectToAction("Carrito");
+}
+
+  public async Task<IActionResult> Clientes()
+  {
+      var users = await _context.USERs.ToListAsync();
+
+      return View(users);
+  }
+
+  public async Task<IActionResult> DetalleUsuario(int id)
+{
+    var user = await _context.USERs.FirstOrDefaultAsync(u => u.id == id);
+    var orders = await _context.ORDERs.Where(o => o.Users.id == id).ToListAsync();
+
+    if (user == null)
+    {
+        return NotFound();
+    }
+
+    var viewModel = new UserOrdersViewModel
+    {
+        User = user,
+        Orders = orders
+    };
+
+    return View(viewModel);
+}
 
 }
