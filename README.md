@@ -21,13 +21,14 @@ Raizen Tech presenta una interfaz agradable para el usuario, dinámica e interac
 
 ##### Diagrama de flujo sencillo de login
 
-```flow
-flowchart TD;
-    A[Login User]-->B{¿El usuario se encuentra registrado?};
+```mermaid
+graph TD;
+    A[Login User] --> B["¿"Se encuentra registrado?];
     B -- Yes --> C[Ingreso para comprar en la web];
     B -- No --> D[Crear una cuenta];
-    C -----> E[Bienvenido a Raizen Tech!];
-    D -----> E[Bienvenido a Raizen Tech!];
+    C -----> E["¡"Bienvenido a Raizen Tech!];
+    D -----> E["¡"Bienvenido a Raizen Tech!];
+    
 ```
 ### Prueba Online
 
