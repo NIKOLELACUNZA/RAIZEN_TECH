@@ -1,0 +1,55 @@
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@model IEnumerable<PRODUCT>
+
+@{
+  ViewData["Title"] = "Catalogo";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+</style>
+
+<div class="container-catalogo">
+  <section class="container-related-products">
+    <h2>Products</h2>
+    <div class="card-list-products">
+      @foreach (var producto in Model)
+      {
+        <div class="card">
+          <div class="card-img">
+            <img src="@producto.Image_URL" alt="@producto.Name">
+          </div>
+          <div class="info-card">
+            <div class="text-product">
+              <h3>@producto.Brand</h3>
+              <h3>@producto.Category</h3>
+              <h3>@producto.Name</h3>
+            </div>
+            <div class="price">
+              @producto.Price.ToString("C")
+            </div>
+          </div>
+          @if (User.IsInRole("Administrador"))
+          {
+            <a asp-action="Edit" asp-route-id="@producto.id" class="btn btn-primary">Edit</a>
+            <a asp-action="Delete" asp-route-id="@producto.id" class="btn btn-danger">Delete</a>
+          }
+          @if (User.IsInRole("Cliente"))
+          {
+            <a asp-action="Detalle" asp-route-id="@producto.id" class="btn btn-success">Ver detalles</a>
+          }
+        </div>
+
+      }
+    </div>
+
+  </section>
+  <section class="boton-addproduct">
+    @if (User.IsInRole("Administrador"))
+    {
+      <p>
+        <a asp-action="create" class="btn btn-succes">Add Product</a>
+      </p>
+    }
+  </section>
+</div>

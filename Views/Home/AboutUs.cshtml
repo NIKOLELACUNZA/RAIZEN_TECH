@@ -1,0 +1,48 @@
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@model IEnumerable<PRODUCT>
+
+<style>
+ .title {
+    color: #FFFFFF;
+    text-align: center;
+ }
+ .text{
+  color:#FFFFFF;
+  font-size: 20px;
+ }
+ .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+ }
+ .container-about-us{
+  color: #000 !important;
+ }
+</style>
+
+
+<div class="container-about-us">
+<div>
+    <h1 class="title"style="color: #000;">MISSION</h1>
+  <p class="text"style="color: #000;">
+Our mission is to provide advanced and reliable solutions for our customers' connectivity needs by offering high-quality, sustainable and energy-efficient products and providing excellent customer service while staying at the forefront of the wireless industry. network technology.</p>
+  <div class="image-container">
+    <img
+      src="https://greatpeopleinside.com/wp-content/uploads/2017/05/HR-GR8-technology.jpg"
+      alt="Telecom products" class="main-image" height="300px" width="550px"/>
+  </div>
+ </div>
+
+  <div>
+    <h1 class="title" style="color: #000;">Vision</h1>
+  <p class="text"style="color: #000;">To be the leading company in the network technology market, recognized for offering high-quality, innovative and reliable products that meet the needs of our customers, while promoting energy efficiency and sustainability.</p>
+  <div class="image-container">
+    <img
+      src="https://imageio.forbes.com/specials-images/imageserve/61d52d4e3a76ed81ac034ea8/0x0.jpg?format=jpg&width=1200"
+      alt="Telecom products" class="main-image" height="300px" width="550px" />
+  </div>
+ </div>
+</div>
+ 

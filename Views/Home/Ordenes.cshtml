@@ -1,0 +1,54 @@
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@model IEnumerable<ORDER>
+
+@{
+    ViewData["Title"] = "Ordenes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+</style>
+
+<div class="container-catalogo">
+    <section class="container-related-products">
+        <h2>Ordenes</h2>
+        <table border="1" >
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Fecha de Orden</th>
+                    <th>Monto Total</th>
+                    <th>Direccion</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var orden in Model)
+            {     
+                <tr>
+                        <td>@orden.id</td>
+                        <td>@orden.OrderDate</td>
+                        <td>@orden.Total_Amount</td>
+                        <td>@orden.Shipping_Address</td>
+                        <td>@orden.Status</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</div>

@@ -1,0 +1,30 @@
+@{
+  ViewBag.Title = "Pago";
+}
+
+
+<div class="container-pasarela">
+  <h2>Pago</h2>
+  <form method="post" action="/Home/ProcesarPago" class="row">
+    <div class="form-group col-md-6">
+      <label for="nombre">Nombre del titular:</label>
+      <input type="text" id="nombre" name="nombre" required class="form-control" />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="numeroTarjeta">Número de la tarjeta:</label>
+      <input type="text" id="numeroTarjeta" name="numeroTarjeta" required class="form-control" />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="fechaExpiracion">Fecha de expiración:</label>
+      <input type="date" id="fechaExpiracion" name="fechaExpiracion" required class="form-control" />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="cvv">CVV:</label>
+      <input type="text" id="cvv" name="cvv" required class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Pagar</button>
+  </form>
+
+</div>
+
+

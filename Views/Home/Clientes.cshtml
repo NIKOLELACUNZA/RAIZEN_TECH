@@ -1,0 +1,31 @@
+@model List<USERS>
+
+
+<div class="customers">
+  <h1>Clients</h1>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        @* <th>Name</th> *@
+        <th>Email</th>
+        @* <th>Address</th>
+        <th>PhoneNumber</th> *@
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var user in Model)
+      {
+        <tr>
+          @* <td>@user.Name</td> *@
+          <td>@user.Email</td>
+          @* <td>@user.Address</td>
+        <td>@user.PhoneNumber</td> *@
+          <td><a asp-controller="Home" asp-action="DetalleUsuario" asp-route-id="@user.id">Ver Ordenes</a></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+</div>

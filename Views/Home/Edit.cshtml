@@ -1,0 +1,44 @@
+@model PRODUCT
+
+<h1>Edit producto</h1>
+
+<form asp-action="Edit">
+  <div class="form-group">
+    <label asp-for="Brand" class="control-label"></label>
+    <input asp-for="Brand" class="form-control" />
+    <span asp-validation-for="Brand" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Descripcion" class="control-label"></label>
+    <input asp-for="Descripcion" class="form-control" />
+    <span asp-validation-for="Descripcion" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Price" class="control-label"></label>
+    <input asp-for="Price" class="form-control" />
+    <span asp-validation-for="Price" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Quantity" class="control-label"></label>
+    <input asp-for="Quantity" class="form-control" />
+    <span asp-validation-for="Quantity" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Image_URL" class="control-label"></label>
+    <input asp-for="Image_URL" class="form-control" />
+    <span asp-validation-for="Image_URL" class="text-danger"></span>
+  </div>
+    <div class="form-group">
+    <label asp-for="Especifications" class="control-label"></label>
+    <input asp-for="Especifications" class="form-control" />
+    <span asp-validation-for="Especifications" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Save" class="btn btn-primary" />
+  </div>
+</form>
