@@ -184,11 +184,11 @@ public async Task<IActionResult> AddToCart(int productId, int quantity)
         // Inicializa los campos necesarios de tu objeto ORDER aquí
         Users = user,
         OrderDate = DateTime.UtcNow,
-        // Otros campos...
     };
     _context.ORDERs.Add(newOrder);
     await _context.SaveChangesAsync();
 
+    decimal nuevoTotal=0;
     // Trasladar elementos del carrito a ítems del pedido
     foreach (var cartItem in listaCarrito)
     {
@@ -204,8 +204,11 @@ public async Task<IActionResult> AddToCart(int productId, int quantity)
         
         // Eliminar el item del carrito
         _context.CART_ITEMs.Remove(cartItem);
+        nuevoTotal+=cartItem.Product.Price * cartItem.Quantity;
+        
     }
 
+    newOrder.Total_Amount = nuevoTotal;
     // Finalmente, guardar los cambios en el contexto y redireccionar al usuario
     await _context.SaveChangesAsync();
 
