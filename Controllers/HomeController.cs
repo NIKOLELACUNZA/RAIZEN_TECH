@@ -24,11 +24,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-      DateTime orderDateUtc = DateTime.UtcNow;
-      DateTime orderDateLocal = orderDateUtc.ToLocalTime();
-
-      Console.WriteLine("Order Date (UTC): " + orderDateUtc.ToString());
-      Console.WriteLine("Order Date (Local): " + orderDateLocal.ToString());
+      Console.WriteLine("Order Date (Local): " + DateTime.Now.ToString());
       return View();
     }
 
@@ -170,8 +166,9 @@ public async Task<IActionResult> AddToCart(int productId, int quantity)
   }
 
 [HttpPost]
-  public async Task<IActionResult> ProcesarPago()
+  public async Task<IActionResult> ProcesarPago(string shipping)
 {
+  System.Console.WriteLine(shipping);
     string idUserDef = _userManager.GetUserId(User);
     USERS user = await _context.USERs.FirstOrDefaultAsync(u => u.idUserDef == idUserDef);
 
@@ -188,7 +185,8 @@ public async Task<IActionResult> AddToCart(int productId, int quantity)
     {
         // Inicializa los campos necesarios de tu objeto ORDER aquí
         Users = user,
-        OrderDate = DateTime.UtcNow.ToLocalTime(),
+        OrderDate=DateTime.UtcNow,
+        Shipping_Address=shipping,
     };
     _context.ORDERs.Add(newOrder);
     await _context.SaveChangesAsync();
