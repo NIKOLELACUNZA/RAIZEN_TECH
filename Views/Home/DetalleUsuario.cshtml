@@ -12,6 +12,7 @@
         <th>Total amount</th>
         <th>Shipping Address</th>
         <th>Status</th>
+        <th>Comprobante de pago</th>
         <!-- Puedes agregar aquí más encabezados de columnas según la información del pedido que quieras mostrar -->
       </tr>
     </thead>
@@ -24,6 +25,7 @@
           <td>@order.Total_Amount</td>
           <td>@order.Shipping_Address</td>
           <td>@order.Status</td>
+          <td><a href="/Home/DescargarFactura?orderId=@order.id" target="_blank">Ver factura</a></td>
           <!-- Puedes agregar aquí más celdas con la información del pedido que quieras mostrar -->
         </tr>
       }

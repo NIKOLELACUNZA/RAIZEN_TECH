@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PRUEBA.ViewModels;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace PRUEBA.Controllers;
 
@@ -244,4 +246,66 @@ public async Task<IActionResult> AddToCart(int productId, int quantity)
     return View(viewModel);
 }
 
+
+  [HttpGet]
+  public IActionResult DescargarFactura(int orderId)
+  {
+      var order = _context.ORDERs.Include(o => o.Users).FirstOrDefault(o => o.id == orderId);
+    if (order == null)
+    {
+        return NotFound();
+    }
+
+    using (var memoryStream = new MemoryStream())
+    {
+        Document doc = new Document(PageSize.A4);
+        PdfWriter writer = PdfWriter.GetInstance(doc, memoryStream);
+
+        doc.Open();
+
+        // Agregamos metadatos al documento
+        doc.AddTitle("Factura de Compra");
+        doc.AddCreator("MiEmpresa");
+
+        // Agregamos el contenido de la factura
+        doc.Add(new Paragraph("Factura de Compra"));
+        doc.Add(new Paragraph($"Fecha: {order.OrderDate}"));
+        doc.Add(new Paragraph($"Nombre: {order.Users.Name}"));
+        doc.Add(new Paragraph($"Dirección: {order.Shipping_Address ?? order.Users.Address}"));
+        doc.Add(new Paragraph("Detalles de Compra: "));
+
+        var orderItems = _context.ORDER_ITEMs
+                     .Include(oi => oi.Product)  // Esto cargará los productos relacionados
+                     .Where(oi => oi.Order.id == order.id)
+                     .ToList();
+
+        doc.Add(new Paragraph("/n"));
+        // Crear una tabla con 5 columnas (producto, cantidad, precio unitario, subtotal)
+        PdfPTable table = new PdfPTable(4);
+        table.WidthPercentage = 100; //Establecer el ancho de la tabla al 100% del documento
+
+        // Agregar cabeceras de la tabla
+        table.AddCell("Producto");
+        table.AddCell("Cantidad");
+        table.AddCell("Precio Unitario");
+        table.AddCell("Subtotal");
+        // Rellenar la tabla con los detalles de los productos
+        foreach (var item in orderItems)
+        {
+            table.AddCell(item.Product.Name);
+            table.AddCell(item.Quantity.ToString());
+            table.AddCell(item.Product.Price.ToString());
+            table.AddCell((item.Quantity * item.Product.Price).ToString());
+        }
+
+        // Añadir la tabla al documento
+        doc.Add(table);
+
+        doc.Add(new Paragraph($"Total: {order.Total_Amount}"));
+        doc.Close();
+
+        var bytes = memoryStream.ToArray();
+        return File(bytes, "application/pdf", $"Factura-{order.id}.pdf");
+    }
+  }
 }
