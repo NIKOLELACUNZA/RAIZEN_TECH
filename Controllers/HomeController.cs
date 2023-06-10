@@ -8,6 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using PRUEBA.ViewModels;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
+using OpenAI.GPT3;
+using OpenAI.GPT3.Interfaces;
+using OpenAI.GPT3.Managers;
+using OpenAI.GPT3.ObjectModels.RequestModels;
+using OpenAI.GPT3.ObjectModels;
 
 namespace PRUEBA.Controllers;
 
@@ -18,15 +23,49 @@ public class HomeController : Controller
 
     private readonly UserManager<IdentityUser> _userManager;
 
+    
+
     public HomeController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
     {
         _context=context;
         _userManager=userManager;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> IndexAsync()
     {
       Console.WriteLine("Order Date (Local): " + DateTime.Now.ToString());
+
+      var gpt3 = new OpenAIService(new OpenAiOptions()
+      {
+        ApiKey = "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"
+      });
+
+
+      var completionResult = await gpt3.Completions.CreateCompletion(new CompletionCreateRequest()
+      {
+          Prompt = "Dame un titulo para mi empresa ecommerce de Raizen Tech sobre ventas de productos tecnologicos",
+          Model = OpenAI.GPT3.ObjectModels.Models.TextDavinciV2,
+          Temperature = 0.5F,
+          MaxTokens = 100
+      });
+
+      if (completionResult.Successful)
+      {
+          foreach (var choice in completionResult.Choices)
+          {
+              ViewBag.Message = choice.Text;
+          }                
+      }
+      else
+      {
+          if (completionResult.Error == null)
+          {
+              throw new Exception("Unknown Error");
+          }
+          Console.WriteLine($"{completionResult.Error.Code}: {completionResult.Error.Message}");
+      }
+      
+
       return View();
     }
 
