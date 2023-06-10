@@ -8,11 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using PRUEBA.ViewModels;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
-using OpenAI.GPT3;
-using OpenAI.GPT3.Interfaces;
-using OpenAI.GPT3.Managers;
-using OpenAI.GPT3.ObjectModels.RequestModels;
-using OpenAI.GPT3.ObjectModels;
+using System.Net.Http.Headers;
+using System.Text.Json;
+using System.Text;
 
 namespace PRUEBA.Controllers;
 
@@ -23,11 +21,7 @@ public class HomeController : Controller
 
     private readonly UserManager<IdentityUser> _userManager;
 
-    private readonly IConfiguration _configuration;
-
-    
-
-    public HomeController(ApplicationDbContext context, UserManager<IdentityUser> userManager,IConfiguration configuration)
+    public HomeController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
     {
         _context=context;
         _userManager=userManager;
@@ -35,39 +29,44 @@ public class HomeController : Controller
 
     public async Task<IActionResult> IndexAsync()
     {
-      Console.WriteLine("Order Date (Local): " + DateTime.Now.ToString());
 
-      string apiKey = _configuration["API_KEY"];
-        
-        var gpt3 = new OpenAIService(new OpenAiOptions()
+      string apiKey = Environment.GetEnvironmentVariable("API_KEY");
+
+      try
         {
-            ApiKey = apiKey
-        });
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
 
-      var completionResult = await gpt3.Completions.CreateCompletion(new CompletionCreateRequest()
-      {
-          Prompt = "Dame un titulo para mi empresa ecommerce de Raizen Tech sobre ventas de productos tecnologicos",
-          Model = OpenAI.GPT3.ObjectModels.Models.TextDavinciV2,
-          Temperature = 0.5F,
-          MaxTokens = 100
-      });
+                var json = JsonSerializer.Serialize(new
+                {
+                    model = "text-davinci-002",
+                    prompt = $"Suggest three names for an animal that is a superhero. " +
+                             $"Animal: Gato " +
+                             $"Names:",
+                    temperature = 0.7f,
+                    max_tokens = 50
+                });
 
-      if (completionResult.Successful)
-      {
-          foreach (var choice in completionResult.Choices)
-          {
-              ViewBag.Message = choice.Text;
-          }                
-      }
-      else
-      {
-          if (completionResult.Error == null)
-          {
-              throw new Exception("Unknown Error");
-          }
-          Console.WriteLine($"{completionResult.Error.Code}: {completionResult.Error.Message}");
-      }
-      
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("https://api.openai.com/v1/completions", content);
+                var resjson = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorResponse = JsonSerializer.Deserialize<dynamic>(resjson);
+                    throw new Exception(errorResponse.error.message.ToString());
+                }
+
+                var data = JsonSerializer.Deserialize<dynamic>(resjson);
+                System.Console.WriteLine(data);
+                ViewBag.Message = data.GetProperty("choices")[0].GetProperty("text").GetString();
+            }
+        }
+        catch (Exception ex)
+        {
+            ViewBag.Message = $"An error occurred: {ex.Message}";
+        }
 
       return View();
     }

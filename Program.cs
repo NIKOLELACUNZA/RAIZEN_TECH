@@ -3,8 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using PRUEBA.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using StackExchange.Redis;
+using DotNetEnv;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Carga las variables de entorno del archivo .env
+Env.Load();
 
 // Add services to the container.
 
