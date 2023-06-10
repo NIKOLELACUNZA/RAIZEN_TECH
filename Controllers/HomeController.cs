@@ -23,9 +23,11 @@ public class HomeController : Controller
 
     private readonly UserManager<IdentityUser> _userManager;
 
+    private readonly IConfiguration _configuration;
+
     
 
-    public HomeController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+    public HomeController(ApplicationDbContext context, UserManager<IdentityUser> userManager,IConfiguration configuration)
     {
         _context=context;
         _userManager=userManager;
@@ -35,11 +37,12 @@ public class HomeController : Controller
     {
       Console.WriteLine("Order Date (Local): " + DateTime.Now.ToString());
 
-      var gpt3 = new OpenAIService(new OpenAiOptions()
-      {
-        ApiKey = "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"
-      });
-
+      string apiKey = _configuration["API_KEY"];
+        
+        var gpt3 = new OpenAIService(new OpenAiOptions()
+        {
+            ApiKey = apiKey
+        });
 
       var completionResult = await gpt3.Completions.CreateCompletion(new CompletionCreateRequest()
       {
