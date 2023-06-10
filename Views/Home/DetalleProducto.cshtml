@@ -53,7 +53,26 @@
           <a href="#"><i class="fa-brands fa-linkedin"></i></a>
         </div>
       </div>
+
+      @using (Html.BeginForm("DarRecomendaciones", "Home", FormMethod.Post))
+      {
+        <div class="form-group mt-2">
+          <label for="usoProducto">¿Para qué usarás este producto?</label>
+          <input type="text" class="form-control" id="usoProducto" name="usoProducto" required>
+        </div>
+        <input type="hidden" class="form-control" id="producto" name="producto" value="@Model.Descripcion" required>
+
+        <input type="hidden" class="form-control" id="id" name="id" value="@Model.id" required>
+
+        <button type="submit" class="btn btn-primary">Pedir recomendaciones</button>
+        <div class="card-body mt-2">
+          <p class="card-text">@ViewBag.Message</p>
+        </div>
+
+      }
     </div>
+
+
 
   </div>
 </main>

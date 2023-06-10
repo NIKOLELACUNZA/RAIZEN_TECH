@@ -30,44 +30,6 @@ public class HomeController : Controller
     public async Task<IActionResult> IndexAsync()
     {
 
-      string apiKey = Environment.GetEnvironmentVariable("API_KEY");
-
-      try
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
-
-                var json = JsonSerializer.Serialize(new
-                {
-                    model = "text-davinci-002",
-                    prompt = $"Suggest three names for an animal that is a superhero. " +
-                             $"Animal: Gato " +
-                             $"Names:",
-                    temperature = 0.7f,
-                    max_tokens = 50
-                });
-
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("https://api.openai.com/v1/completions", content);
-                var resjson = await response.Content.ReadAsStringAsync();
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    var errorResponse = JsonSerializer.Deserialize<dynamic>(resjson);
-                    throw new Exception(errorResponse.error.message.ToString());
-                }
-
-                var data = JsonSerializer.Deserialize<dynamic>(resjson);
-                System.Console.WriteLine(data);
-                ViewBag.Message = data.GetProperty("choices")[0].GetProperty("text").GetString();
-            }
-        }
-        catch (Exception ex)
-        {
-            ViewBag.Message = $"An error occurred: {ex.Message}";
-        }
-
       return View();
     }
 
@@ -348,5 +310,45 @@ public async Task<IActionResult> AddToCart(int productId, int quantity)
         var bytes = memoryStream.ToArray();
         return File(bytes, "application/pdf", $"Factura-{order.id}.pdf");
     }
+  }
+
+  [HttpPost]
+  public async Task<IActionResult> DarRecomendaciones(string usoProducto,string producto,int id){
+    string apiKey = Environment.GetEnvironmentVariable("API_KEY");
+    PRODUCT productoDetalle = _context.PRODUCTs.Find(id);
+      try
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+
+                var json = JsonSerializer.Serialize(new
+                {
+                    model = "text-davinci-003",
+                    prompt = $"El producto: {producto} es el indicado para: {usoProducto}?",
+                    temperature = 0.7f,
+                    max_tokens = 200
+                });
+
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("https://api.openai.com/v1/completions", content);
+                var resjson = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorResponse = JsonSerializer.Deserialize<dynamic>(resjson);
+                    throw new Exception(errorResponse.error.message.ToString());
+                }
+
+                var data = JsonSerializer.Deserialize<dynamic>(resjson);
+                System.Console.WriteLine(data);
+                ViewBag.Message = data.GetProperty("choices")[0].GetProperty("text").GetString();
+            }
+        }
+        catch (Exception ex)
+        {
+            ViewBag.Message = $"An error occurred: {ex.Message}";
+        }
+    return View("DetalleProducto",productoDetalle);
   }
 }
